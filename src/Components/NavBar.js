@@ -1,4 +1,4 @@
-function Header() {
+function NavBar() {
 	return (
 		<div>
 			<h1>Jammming</h1>
@@ -6,4 +6,4 @@ function Header() {
 	);
 }
 
-export default Header;
+export default NavBar;

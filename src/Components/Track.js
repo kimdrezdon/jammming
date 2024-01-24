@@ -1,4 +1,4 @@
-function Track() {
+function Track(props) {
 	return (
 		<div>
 			<div>
@@ -7,7 +7,7 @@ function Track() {
 					<span>Artist</span>-<span>Album</span>
 				</h4>
 			</div>
-			<div>+</div>
+			<div>{props.addRemove === 'add' ? '+' : '-'}</div>
 		</div>
 	);
 }
