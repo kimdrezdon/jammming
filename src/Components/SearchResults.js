@@ -1,9 +1,12 @@
 import Tracklist from './Tracklist';
 
-function SearchResults() {
+function SearchResults(props) {
 	return (
 		<div>
-			<Tracklist addRemove='add' />
+			<Tracklist
+				addRemove='add'
+				tracks={props.tracks}
+			/>
 		</div>
 	);
 }

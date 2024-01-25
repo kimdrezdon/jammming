@@ -1,10 +1,14 @@
+import styles from '../styles/Track.module.css';
+
 function Track(props) {
+	const { song, artist, album } = props.track;
+
 	return (
-		<div>
+		<div className={styles.div}>
 			<div>
-				<h3>Song</h3>
+				<h3>{song}</h3>
 				<h4>
-					<span>Artist</span>-<span>Album</span>
+					<span>{artist}</span>-<span>{album}</span>
 				</h4>
 			</div>
 			<div>{props.addRemove === 'add' ? '+' : '-'}</div>

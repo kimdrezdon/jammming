@@ -1,13 +1,16 @@
 import Tracklist from './Tracklist';
 
-function Playlist() {
+function Playlist(props) {
 	return (
 		<div>
 			<input
 				type='text'
 				value='title'
 			></input>
-			<Tracklist addRemove='remove' />
+			<Tracklist
+				addRemove='remove'
+				tracks={props.tracks}
+			/>
 			<button>Save to Spotify</button>
 		</div>
 	);
