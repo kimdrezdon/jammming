@@ -5,9 +5,9 @@ function Tracklist(props) {
 	const { tracks, addRemove } = props;
 	return (
 		<div className={styles.div}>
-			{tracks.map((track, index) => (
+			{tracks.map(track => (
 				<Track
-					key={index}
+					key={track.id}
 					addRemove={addRemove}
 					track={track}
 				/>
