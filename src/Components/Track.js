@@ -11,7 +11,7 @@ function Track(props) {
 					<span>{artist}</span>-<span>{album}</span>
 				</h4>
 			</div>
-			<div>{props.addRemove === 'add' ? '+' : '-'}</div>
+			<div>{props.addRemove}</div>
 		</div>
 	);
 }

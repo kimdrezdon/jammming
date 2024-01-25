@@ -4,7 +4,7 @@ function SearchResults(props) {
 	return (
 		<div>
 			<Tracklist
-				addRemove='add'
+				addRemove='+'
 				tracks={props.tracks}
 			/>
 		</div>
