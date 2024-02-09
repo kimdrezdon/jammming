@@ -1,11 +1,11 @@
 import Tracklist from './Tracklist';
 
-function SearchResults(props) {
+function SearchResults({ tracks }) {
 	return (
 		<div>
 			<Tracklist
 				addRemove='+'
-				tracks={props.tracks}
+				tracks={tracks}
 			/>
 		</div>
 	);

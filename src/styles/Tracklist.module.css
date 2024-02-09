@@ -1,4 +1,5 @@
-.div {
+.ul {
 	border: 1px solid purple;
 	margin: 10px;
+	list-style: none;
 }

@@ -1,17 +1,30 @@
 import Tracklist from './Tracklist';
+import { useState } from 'react';
 
-function Playlist(props) {
+function Playlist({ tracks }) {
+	const [playlistTitle, setPlaylistTitle] = useState('');
+
+	const handleChange = e => {
+		setPlaylistTitle(e.target.value);
+	};
+
 	return (
 		<div>
 			<input
 				type='text'
-				value='title'
+				placeholder='Set a playlist title...'
+				value={playlistTitle}
+				onChange={handleChange}
 			></input>
 			<Tracklist
 				addRemove='-'
-				tracks={props.tracks}
+				tracks={tracks}
 			/>
-			<button>Save to Spotify</button>
+			{tracks.length > 0 ? (
+				<button onClick={() => alert('Saved to Spotify')}>
+					Save to Spotify
+				</button>
+			) : null}
 		</div>
 	);
 }

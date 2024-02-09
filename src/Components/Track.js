@@ -1,18 +1,22 @@
 import styles from '../styles/Track.module.css';
 
-function Track(props) {
-	const { song, artist, album } = props.track;
+function Track({ trackObject, addRemove }) {
+	const { song, artist, album } = trackObject;
+
+	const handleClick = () => {
+		alert('Add remove clicked');
+	};
 
 	return (
-		<div className={styles.div}>
+		<li className={styles.li}>
 			<div>
 				<h3>{song}</h3>
 				<h4>
 					<span>{artist}</span>-<span>{album}</span>
 				</h4>
 			</div>
-			<div>{props.addRemove}</div>
-		</div>
+			<button onClick={handleClick}>{addRemove}</button>
+		</li>
 	);
 }
 

@@ -5,23 +5,23 @@ import NavBar from './NavBar';
 import SearchResults from './SearchResults';
 import Playlist from './Playlist';
 
-function App() {
-	const searchResultsArray = [
-		{ song: 'Lateralus', artist: 'Tool', album: 'Lateralus', id: '0943' },
-		{
-			song: 'Rx Queen',
-			artist: 'Deftones',
-			album: 'White Pony',
-			id: '2309',
-		},
-		{
-			song: 'A History of Bad Men',
-			artist: 'Melvins',
-			album: 'A Senile Animal',
-			id: '1230',
-		},
-	];
+const searchResultsArray = [
+	{ song: 'Lateralus', artist: 'Tool', album: 'Lateralus', id: '0943' },
+	{
+		song: 'Rx Queen',
+		artist: 'Deftones',
+		album: 'White Pony',
+		id: '2309',
+	},
+	{
+		song: 'A History of Bad Men',
+		artist: 'Melvins',
+		album: 'A Senile Animal',
+		id: '1230',
+	},
+];
 
+function App() {
 	const [searchResults, setSearchResults] = useState(searchResultsArray);
 	const [playlist, setPlaylist] = useState([]);
 

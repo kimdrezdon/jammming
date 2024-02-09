@@ -1,10 +1,25 @@
+import { useState } from 'react';
+
 function SearchBar() {
+	const [searchInput, setSearchInput] = useState('');
+
+	const handleSubmit = e => {
+		e.preventDefault();
+		if (!searchInput) return;
+		alert('Searching...');
+	};
+
+	const handleChange = e => {
+		setSearchInput(e.target.value);
+	};
 	return (
-		<form>
+		<form onSubmit={handleSubmit}>
 			<input
 				type='text'
-				value='Search Spotify'
-			></input>
+				placeholder='Search Spotify...'
+				value={searchInput}
+				onChange={handleChange}
+			/>
 			<button>Search</button>
 		</form>
 	);
