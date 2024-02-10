@@ -9,3 +9,14 @@
 	justify-content: space-around;
 	align-items: center;
 }
+
+.ul {
+	border: 1px solid purple;
+	margin: 10px;
+	list-style: none;
+}
+
+.li {
+	border: 1px solid blue;
+	margin: 10px;
+}
