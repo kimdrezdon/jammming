@@ -21,17 +21,29 @@ function App() {
 	const [searchResults, setSearchResults] = useState(searchResultsArray);
 	const [playlist, setPlaylist] = useState([]);
 
-	// const handleAddToPlaylist = track => {
-	// 	setPlaylist(playlist => [...playlist, track]);
-	// };
+	const handleEditPlaylist = (trackObject, addRemove) => {
+		if (addRemove === '+') {
+			setPlaylist(playlist => [...playlist, trackObject]);
+		} else if (addRemove === '-') {
+			setPlaylist(playlist =>
+				playlist.filter(track => track.id !== trackObject.id)
+			);
+		}
+	};
 
 	return (
 		<div className={styles.div}>
 			<NavBar />
 			<SearchBar />
 			<div className={styles.flex}>
-				<SearchResults tracks={searchResults} />
-				<Playlist tracks={playlist} />
+				<SearchResults
+					tracks={searchResults}
+					onEditPlaylist={handleEditPlaylist}
+				/>
+				<Playlist
+					tracks={playlist}
+					onEditPlaylist={handleEditPlaylist}
+				/>
 			</div>
 		</div>
 	);
@@ -70,18 +82,19 @@ function SearchBar() {
 	);
 }
 
-function SearchResults({ tracks }) {
+function SearchResults({ tracks, onEditPlaylist }) {
 	return (
 		<div>
 			<Tracklist
 				addRemove='+'
 				tracks={tracks}
+				onEditPlaylist={onEditPlaylist}
 			/>
 		</div>
 	);
 }
 
-function Playlist({ tracks }) {
+function Playlist({ tracks, onEditPlaylist }) {
 	const [playlistTitle, setPlaylistTitle] = useState('');
 
 	const handleChange = e => {
@@ -99,6 +112,7 @@ function Playlist({ tracks }) {
 			<Tracklist
 				addRemove='-'
 				tracks={tracks}
+				onEditPlaylist={onEditPlaylist}
 			/>
 			{tracks.length > 0 ? (
 				<button onClick={() => alert('Saved to Spotify')}>
@@ -109,8 +123,7 @@ function Playlist({ tracks }) {
 	);
 }
 
-function Tracklist(props) {
-	const { tracks, addRemove } = props;
+function Tracklist({ tracks, addRemove, onEditPlaylist }) {
 	return (
 		<ul className={styles.ul}>
 			{tracks.map(track => (
@@ -118,17 +131,18 @@ function Tracklist(props) {
 					key={track.id}
 					addRemove={addRemove}
 					trackObject={track}
+					onEditPlaylist={onEditPlaylist}
 				/>
 			))}
 		</ul>
 	);
 }
 
-function Track({ trackObject, addRemove }) {
+function Track({ trackObject, addRemove, onEditPlaylist }) {
 	const { song, artist, album } = trackObject;
 
 	const handleClick = () => {
-		addRemove === '+' ? alert('Add clicked') : alert('Remove clicked');
+		onEditPlaylist(trackObject, addRemove);
 	};
 
 	return (
