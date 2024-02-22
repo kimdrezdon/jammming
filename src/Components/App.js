@@ -32,10 +32,11 @@ function App() {
 	};
 
 	return (
-		<div className={styles.div}>
-			<NavBar />
-			<SearchBar />
-			<div className={styles.flex}>
+		<div>
+			<NavBar>
+				<Search />
+			</NavBar>
+			<Main>
 				<SearchResults
 					tracks={searchResults}
 					onEditPlaylist={handleEditPlaylist}
@@ -44,20 +45,22 @@ function App() {
 					tracks={playlist}
 					onEditPlaylist={handleEditPlaylist}
 				/>
-			</div>
+			</Main>
 		</div>
 	);
 }
 
-function NavBar() {
+function NavBar({ children }) {
 	return (
-		<div>
+		<div className={styles.nav}>
 			<h1>Jammming</h1>
+			{children}
+			<h2>Username</h2>
 		</div>
 	);
 }
 
-function SearchBar() {
+function Search() {
 	const [searchInput, setSearchInput] = useState('');
 
 	const handleSubmit = e => {
@@ -70,7 +73,10 @@ function SearchBar() {
 		setSearchInput(e.target.value);
 	};
 	return (
-		<form onSubmit={handleSubmit}>
+		<form
+			className={styles.search}
+			onSubmit={handleSubmit}
+		>
 			<input
 				type='text'
 				placeholder='Search Spotify...'
@@ -82,9 +88,13 @@ function SearchBar() {
 	);
 }
 
+function Main({ children }) {
+	return <div className={styles.flex}>{children}</div>;
+}
+
 function SearchResults({ tracks, onEditPlaylist }) {
 	return (
-		<div>
+		<div className={styles.box}>
 			<Tracklist
 				addRemove='+'
 				tracks={tracks}
@@ -102,7 +112,7 @@ function Playlist({ tracks, onEditPlaylist }) {
 	};
 
 	return (
-		<div>
+		<div className={styles.box}>
 			<input
 				type='text'
 				placeholder='Set a playlist title...'
@@ -153,7 +163,12 @@ function Track({ trackObject, addRemove, onEditPlaylist }) {
 					<span>{artist}</span>-<span>{album}</span>
 				</h4>
 			</div>
-			<button onClick={handleClick}>{addRemove}</button>
+			<button
+				className={styles.addRemove}
+				onClick={handleClick}
+			>
+				{addRemove}
+			</button>
 		</li>
 	);
 }

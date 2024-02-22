@@ -1,22 +1,100 @@
-.div {
-	border: 1px solid red;
+:root {
+	--background: #f2fbf7;
+	--primary: #38da90;
+	--secondary: #86f3c2;
+	--accent: #46fca9;
+}
+
+h2 {
+	font-weight: 300;
+	font-style: italic;
+	font-size: 18px;
+}
+h3 {
+	font-weight: 500;
+}
+
+h4 {
+	font-weight: 400;
+}
+
+.nav {
+	background-color: var(--accent);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 20px;
+	width: 1000px;
+	margin: 20px auto;
+}
+
+.search {
+	width: 500px;
+}
+
+.search button {
+	margin-left: 10px;
+	background-color: var(--primary);
+	padding: 10px;
+	border: none;
+	font-size: 14px;
+}
+
+input {
+	height: 35px;
+	background-color: var(--background);
+	border: none;
+	width: 300px;
+	font-size: 18px;
 }
 
 .flex {
 	display: flex;
-	border: 1px solid orange;
-	margin: 10px;
-	justify-content: space-around;
+	background-color: var(--secondary);
 	align-items: center;
+	justify-content: center;
+	width: 900px;
+	margin: auto;
+	gap: 15px;
+}
+
+.box {
+	background-color: var(--primary);
+	width: 50%;
+	margin: 10px;
+	height: 700px;
+	padding: 10px;
+}
+
+.box input {
+	margin-top: 10px;
 }
 
 .ul {
-	border: 1px solid purple;
-	margin: 10px;
 	list-style: none;
 }
 
 .li {
-	border: 1px solid blue;
+	background-color: var(--accent);
+	width: 95%;
 	margin: 10px;
+	padding: 20px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.li h3 {
+	text-align: left;
+	font-weight: 500;
+}
+
+.li h4 {
+	font-weight: 400;
+}
+
+.addRemove {
+	background: none;
+	border: none;
+	font-size: 24px;
 }
