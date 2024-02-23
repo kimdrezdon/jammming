@@ -18,6 +18,18 @@ h4 {
 	font-weight: 400;
 }
 
+button {
+	padding: 10px;
+	border: none;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+button:active {
+	transform: scale(0.9);
+	transition: transform 0.4s ease-in-out;
+}
+
 .nav {
 	background-color: var(--accent);
 	display: flex;
@@ -35,9 +47,6 @@ h4 {
 .search button {
 	margin-left: 10px;
 	background-color: var(--primary);
-	padding: 10px;
-	border: none;
-	font-size: 14px;
 }
 
 input {
@@ -46,6 +55,10 @@ input {
 	border: none;
 	width: 300px;
 	font-size: 18px;
+}
+
+input:focus-visible {
+	outline: none;
 }
 
 .flex {
@@ -95,6 +108,9 @@ input {
 
 .addRemove {
 	background: none;
-	border: none;
 	font-size: 24px;
+}
+
+.save {
+	background-color: var(--secondary);
 }

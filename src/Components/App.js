@@ -17,34 +17,44 @@ const searchResultsArray = [
 	},
 ];
 
-function App() {
+export default function App() {
+	const [searchInput, setSearchInput] = useState('');
 	const [searchResults, setSearchResults] = useState(searchResultsArray);
 	const [playlist, setPlaylist] = useState([]);
 
-	const handleEditPlaylist = (trackObject, addRemove) => {
-		if (addRemove === '+') {
-			setPlaylist(playlist => [...playlist, trackObject]);
-		} else if (addRemove === '-') {
-			setPlaylist(playlist =>
-				playlist.filter(track => track.id !== trackObject.id)
-			);
-		}
+	const handleAddTrack = trackObject => {
+		setPlaylist(playlist => [...playlist, trackObject]);
+	};
+
+	const handleRemoveTrack = trackObject => {
+		setPlaylist(playlist =>
+			playlist.filter(track => track.id !== trackObject.id)
+		);
 	};
 
 	return (
 		<div>
 			<NavBar>
-				<Search />
+				<Search
+					searchInput={searchInput}
+					onSearch={setSearchInput}
+				/>
 			</NavBar>
 			<Main>
-				<SearchResults
-					tracks={searchResults}
-					onEditPlaylist={handleEditPlaylist}
-				/>
-				<Playlist
-					tracks={playlist}
-					onEditPlaylist={handleEditPlaylist}
-				/>
+				<Box>
+					<SearchResults
+						searchResults={searchResults}
+						onAddTrack={handleAddTrack}
+					/>
+				</Box>
+				<Box>
+					<PlaylistTitleInput />
+					<Playlist
+						playlist={playlist}
+						onRemoveTrack={handleRemoveTrack}
+					/>
+					{playlist.length > 0 ? <SavePlaylistButton /> : null}
+				</Box>
 			</Main>
 		</div>
 	);
@@ -60,9 +70,7 @@ function NavBar({ children }) {
 	);
 }
 
-function Search() {
-	const [searchInput, setSearchInput] = useState('');
-
+function Search({ searchInput, onSearch }) {
 	const handleSubmit = e => {
 		e.preventDefault();
 		if (!searchInput) return;
@@ -70,7 +78,7 @@ function Search() {
 	};
 
 	const handleChange = e => {
-		setSearchInput(e.target.value);
+		onSearch(e.target.value);
 	};
 	return (
 		<form
@@ -92,19 +100,65 @@ function Main({ children }) {
 	return <div className={styles.flex}>{children}</div>;
 }
 
-function SearchResults({ tracks, onEditPlaylist }) {
+function Box({ children }) {
+	return <div className={styles.box}>{children}</div>;
+}
+
+function SearchResults({ searchResults, onAddTrack }) {
 	return (
-		<div className={styles.box}>
-			<Tracklist
-				addRemove='+'
-				tracks={tracks}
-				onEditPlaylist={onEditPlaylist}
-			/>
-		</div>
+		<ul className={styles.ul}>
+			{searchResults.map(track => (
+				<li
+					className={styles.li}
+					key={track.id}
+				>
+					<div>
+						<h3>{track.song}</h3>
+						<h4>
+							<span>{track.artist}</span>-
+							<span>{track.album}</span>
+						</h4>
+					</div>
+					<button
+						className={styles.addRemove}
+						onClick={() => onAddTrack(track)}
+					>
+						+
+					</button>
+				</li>
+			))}
+		</ul>
 	);
 }
 
-function Playlist({ tracks, onEditPlaylist }) {
+function Playlist({ playlist, onRemoveTrack }) {
+	return (
+		<ul className={styles.ul}>
+			{playlist.map(track => (
+				<li
+					className={styles.li}
+					key={track.id}
+				>
+					<div>
+						<h3>{track.song}</h3>
+						<h4>
+							<span>{track.artist}</span>-
+							<span>{track.album}</span>
+						</h4>
+					</div>
+					<button
+						className={styles.addRemove}
+						onClick={() => onRemoveTrack(track)}
+					>
+						-
+					</button>
+				</li>
+			))}
+		</ul>
+	);
+}
+
+function PlaylistTitleInput() {
 	const [playlistTitle, setPlaylistTitle] = useState('');
 
 	const handleChange = e => {
@@ -112,65 +166,22 @@ function Playlist({ tracks, onEditPlaylist }) {
 	};
 
 	return (
-		<div className={styles.box}>
-			<input
-				type='text'
-				placeholder='Set a playlist title...'
-				value={playlistTitle}
-				onChange={handleChange}
-			></input>
-			<Tracklist
-				addRemove='-'
-				tracks={tracks}
-				onEditPlaylist={onEditPlaylist}
-			/>
-			{tracks.length > 0 ? (
-				<button onClick={() => alert('Saved to Spotify')}>
-					Save to Spotify
-				</button>
-			) : null}
-		</div>
+		<input
+			type='text'
+			placeholder='Set a playlist title...'
+			value={playlistTitle}
+			onChange={handleChange}
+		></input>
 	);
 }
 
-function Tracklist({ tracks, addRemove, onEditPlaylist }) {
+function SavePlaylistButton() {
 	return (
-		<ul className={styles.ul}>
-			{tracks.map(track => (
-				<Track
-					key={track.id}
-					addRemove={addRemove}
-					trackObject={track}
-					onEditPlaylist={onEditPlaylist}
-				/>
-			))}
-		</ul>
+		<button
+			onClick={() => alert('Saved to Spotify')}
+			className={styles.save}
+		>
+			Save to Spotify
+		</button>
 	);
 }
-
-function Track({ trackObject, addRemove, onEditPlaylist }) {
-	const { song, artist, album } = trackObject;
-
-	const handleClick = () => {
-		onEditPlaylist(trackObject, addRemove);
-	};
-
-	return (
-		<li className={styles.li}>
-			<div>
-				<h3>{song}</h3>
-				<h4>
-					<span>{artist}</span>-<span>{album}</span>
-				</h4>
-			</div>
-			<button
-				className={styles.addRemove}
-				onClick={handleClick}
-			>
-				{addRemove}
-			</button>
-		</li>
-	);
-}
-
-export default App;
