@@ -1,7 +1,7 @@
 import styles from '../styles/App.module.css';
 
 export function Track({ track, onEditPlaylist, addRemove }) {
-	const { id, album, name, artists } = track;
+	const { album, name, artists } = track;
 
 	return (
 		<li className={styles.li}>

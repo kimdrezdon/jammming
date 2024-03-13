@@ -55,6 +55,7 @@ input {
 	border: none;
 	width: 300px;
 	font-size: 18px;
+	text-decoration: none;
 }
 
 input:focus-visible {
